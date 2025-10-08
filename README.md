@@ -9,6 +9,8 @@ StatEval is the first comprehensive benchmark dedicated to statistics, designed 
   - Foundational Knowledge Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge](https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge)
   - Statistical Research Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research](https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research)
 
+![Overview of StatEval](images/overview.png)
+
 ## Evaluation Results
 
 ### Foundational Knowledge Dataset Results
@@ -68,6 +70,8 @@ This dataset focuses on core statistical concepts and problem-solving abilities 
 
 The dataset comprises a diverse range of question types, from concept recall and multiple-choice questions to open-ended problem-solving scenarios, ensuring comprehensive assessment of both knowledge retention and application abilities.
 
+![Foundational Knowledge Dataset Composition and Distribution](images/html-fundational composition distribution-1.png)
+
 #### Statistical Research Dataset
 This dataset is designed to evaluate models' ability to engage with advanced statistical research content, mirroring the challenges faced when interpreting technical literature. It includes eight distinct categories of statistical properties and results:
 
@@ -81,6 +85,8 @@ This dataset is designed to evaluate models' ability to engage with advanced sta
 - Testing Validity
 
 These categories reflect the key types of statistical claims and guarantees commonly found in academic research papers across statistics, machine learning, and probability theory.
+
+![Statistical Research Dataset Composition and Distribution](images/html-research composition distribution-1.png)
 
 ### Data Extraction Pipeline
 The StatEval datasets were constructed through a systematic multi-stage pipeline:
