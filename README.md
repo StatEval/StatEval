@@ -1,8 +1,6 @@
-# StatEval
-
 # StatEval: A Comprehensive Benchmark for Large Language Models in Statistics
 
-StatEval is the first comprehensive benchmark dedicated to statistics, designed to evaluate large language models' statistical reasoning capabilities across various domains and difficulty levels.
+StatEval is the first comprehensive benchmark dedicated to statistics, designed to evaluate large language models' statistical reasoning capabilities across various domains and difficulty levels. As AI systems increasingly participate in data-driven decision-making processes across science, industry, and policy, their ability to understand and apply statistical concepts accurately has become critically important.
 
 ## Status Update
 - **Code**: Coming soon
@@ -58,9 +56,46 @@ Ident = Identifiability & Consistency; Opt = Optimality Results;
 Struct = Structural Guarantees; Test = Testing Validity.
 
 ## Overview
-StatEval provides a rigorous framework for assessing large language models' proficiency in statistics, covering both foundational knowledge and advanced research-level reasoning. The benchmark includes two specialized datasets:
+StatEval provides a rigorous framework for assessing large language models' proficiency in statistics, addressing a critical gap in existing AI evaluation benchmarks. As statistical reasoning forms the backbone of data-driven decision making, scientific inquiry, and empirical research, evaluating LLMs' capabilities in this domain is essential for understanding their reliability and limitations in real-world applications.
 
-- The Foundational Knowledge Dataset evaluates models on statistical concepts across undergraduate and graduate levels, spanning probability, statistics, and machine learning.
-- The Statistical Research Dataset focuses on advanced research properties, testing models' ability to reason about technical results in statistical literature.
+### Dataset Details
 
-Our evaluation results demonstrate significant performance gaps between models, with closed-source models generally outperforming open-source alternatives, particularly in advanced statistical reasoning tasks. These findings highlight the need for further development in statistical capabilities for large language models.
+#### Foundational Knowledge Dataset
+This dataset focuses on core statistical concepts and problem-solving abilities across three key domains: Probability, Statistics, and Machine Learning. It is structured to evaluate models at two academic levels:
+
+- **Undergraduate level**: Covers fundamental concepts typically taught in introductory and intermediate statistics courses, including basic probability, descriptive statistics, hypothesis testing, and elementary machine learning algorithms.
+- **Graduate level**: Includes advanced topics such as measure-theoretic probability, statistical inference, asymptotic theory, and advanced machine learning techniques commonly encountered in graduate-level coursework.
+
+The dataset comprises a diverse range of question types, from concept recall and multiple-choice questions to open-ended problem-solving scenarios, ensuring comprehensive assessment of both knowledge retention and application abilities.
+
+#### Statistical Research Dataset
+This dataset is designed to evaluate models' ability to engage with advanced statistical research content, mirroring the challenges faced when interpreting technical literature. It includes eight distinct categories of statistical properties and results:
+
+- Asymptotic Properties
+- Convergence & Stability
+- Distributional Properties
+- Generalization & Error Bounds
+- Identifiability & Consistency
+- Optimality Results
+- Structural Guarantees
+- Testing Validity
+
+These categories reflect the key types of statistical claims and guarantees commonly found in academic research papers across statistics, machine learning, and probability theory.
+
+### Data Extraction Pipeline
+The StatEval datasets were constructed through a systematic multi-stage pipeline:
+
+1. **Source collection**: Curated from textbooks, academic courses, and peer-reviewed research papers across statistics, probability, and machine learning domains.
+2. **Content extraction**: Structured information was extracted and transformed into evaluative questions and scenarios.
+3. **Expert validation**: All items were reviewed by domain experts to ensure accuracy, relevance, and appropriate difficulty levels.
+4. **Difficulty calibration**: Questions were categorized by academic level through comparative analysis with standard curricula.
+5. **Redundancy checks**: Ensured minimal overlap between items to maximize informational value.
+
+### Evaluation Framework
+StatEval employs a comprehensive evaluation framework that:
+
+- Measures both quantitative performance (accuracy, consistency) and qualitative reasoning abilities
+- Uses domain-specific metrics tailored to statistical reasoning tasks
+- Provides granular breakdowns by subfield, difficulty level, and question type
+- Enables direct comparison between models across specific statistical competencies
+- Facilitates identification of specific strengths and weaknesses in statistical reasoning
