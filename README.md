@@ -5,6 +5,7 @@ StatEval is the first comprehensive benchmark dedicated to statistics, designed 
 ## Status Update
 - **Code**: Coming soon
 - **Paper**: Already uploaded in this repository
+- **Website**: [https://stateval.github.io/]
 - **Datasets**: Open-sourced and available at:
   - Foundational Knowledge Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge](https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge)
   - Statistical Research Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research](https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research)
@@ -88,20 +89,68 @@ These categories reflect the key types of statistical claims and guarantees comm
 
 ![Statistical Research Dataset Composition and Distribution](images/research.png)
 
-### Data Extraction Pipeline
-The StatEval datasets were constructed through a systematic multi-stage pipeline:
+### Data Processing Pipeline
 
-1. **Source collection**: Curated from textbooks, academic courses, and peer-reviewed research papers across statistics, probability, and machine learning domains.
-2. **Content extraction**: Structured information was extracted and transformed into evaluative questions and scenarios.
-3. **Expert validation**: All items were reviewed by domain experts to ensure accuracy, relevance, and appropriate difficulty levels.
-4. **Difficulty calibration**: Questions were categorized by academic level through comparative analysis with standard curricula.
-5. **Redundancy checks**: Ensured minimal overlap between items to maximize informational value.
+The **StatEval** pipeline extracts and standardizes problems from diverse academic sources using LLMs (GPT-5, Gemini series) combined with human-in-the-loop verification.  
+It consists of five core stages that convert raw documents into high-quality, structured evaluation data.
 
-### Evaluation Framework
-StatEval employs a comprehensive evaluation framework that:
+**Pipeline Steps:**
 
-- Measures both quantitative performance (accuracy, consistency) and qualitative reasoning abilities
-- Uses domain-specific metrics tailored to statistical reasoning tasks
-- Provides granular breakdowns by subfield, difficulty level, and question type
-- Enables direct comparison between models across specific statistical competencies
-- Facilitates identification of specific strengths and weaknesses in statistical reasoning
+1. **File Conversion**  
+   Converts PDFs, scanned files, and `LaTeX` sources into structured text using multi-modal LLMs like *MinerU*.
+
+2. **Context Segmentation**  
+   Extracts theorems and relevant context using LLM-driven patterns (Gemini series), ensuring each fragment is self-contained.
+
+3. **Problem Generation**  
+   Transforms theorems and context into QA pairs using GPT-5, following rules for difficulty, self-containment, single-answer constraints, and quantitative verifiability.
+
+4. **Quality Control**  
+   Automated validation with GPT-5 checks rubric compliance and consistency before human review.
+
+5. **Human Check & Feedback**  
+   Experts verify semantic correctness, difficulty, and dataset classification. Feedback is used to improve agents iteratively.
+
+This pipeline enables fully automated conversion of scholarly materials into standardized, high-quality evaluation datasets for statistical reasoning tasks.
+
+![StatEval data processing pipeline](images/pipeline.png)  
+*Illustration of the **StatEval** data processing pipeline.*
+
+### Evaluation Methodology
+
+Open-ended questions, including those from both the **Foundational Knowledge** and **Statistical Research** datasets, are evaluated through a process-based scoring pipeline designed to assess both final correctness and the quality of intermediate reasoning.
+
+**Evaluation Steps:**
+
+1. **Reasoning Step Extraction**  
+   The model’s response is parsed to identify key reasoning steps, including assumptions, logical transitions, and intermediate derivations.  
+   This reconstructs the complete reasoning chain to capture how the final result is obtained.
+
+2. **Outcome Extraction**  
+   Each reasoning step is further analyzed to extract quantitative or symbolic outcomes (e.g., computed values, derived expressions, identified distributions), ensuring that both logic and intermediate results are available for verification.
+
+3. **LLM Judging**  
+   A dedicated LLM evaluator compares the extracted reasoning steps and outcomes with the reference solution, verifying correctness, necessity, and logical consistency of each step.
+
+4. **Scoring**  
+   Each step is assigned binary scores along three dimensions: Reasoning Accuracy, Step Completeness, and Final Answer Correctness.  
+   Aggregated scores for one evaluation pass are computed as:
+
+   $$
+   S_{{\rm final}}^{(i)} = \alpha S_r^{(i)} + \beta S_s^{(i)} + (1 - \alpha - \beta) S_a^{(i)}
+   $$
+
+   where $\alpha = 0.4$, $\beta = 0.3$, and binary scores $S_r^{(i)}, S_s^{(i)}, S_a^{(i)} \in \{0,1\}$.  
+
+   Scoring is repeated three times, and the final score is:
+
+   $$
+   S_{\rm final} = \min\{ S_{\rm final}^{(1)}, S_{\rm final}^{(2)}, S_{\rm final}^{(3)} \}
+   $$
+
+This four-step design separates reasoning reconstruction from correctness judgment, enabling fine-grained and interpretable evaluation.  
+The framework outputs two complementary indicators: (1) a *final score* reflecting overall correctness, and (2) a *process score* reflecting reasoning quality and stepwise consistency.
+
+![StatEval evaluation pipeline](images/eval_pipeline.png)  
+*Illustration of the evaluation pipeline for open-ended questions in StatEval.*
+
