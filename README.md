@@ -11,7 +11,6 @@ StatEval is the first comprehensive benchmark dedicated to statistics, designed 
   - Statistical Research Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research](https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research)
 
 ![Overview of StatEval](images/overview.png)
-![Overview of StatEval](https://s21.ax1x.com/2025/10/10/pVH0QuF.png)
 
 ## Evaluation Results
 
