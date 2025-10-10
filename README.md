@@ -120,6 +120,10 @@ This pipeline enables fully automated conversion of scholarly materials into sta
 
 Open-ended questions, including those from both the **Foundational Knowledge** and **Statistical Research** datasets, are evaluated through a process-based scoring pipeline designed to assess both final correctness and the quality of intermediate reasoning.
 
+### 2. Evaluation Methodology
+
+Open-ended questions, including those from both the **Foundational Knowledge** and **Statistical Research** datasets, are evaluated through a process-based scoring pipeline designed to assess both final correctness and the quality of intermediate reasoning.
+
 **Evaluation Steps:**
 
 1. **Reasoning Step Extraction**  
@@ -134,23 +138,14 @@ Open-ended questions, including those from both the **Foundational Knowledge** a
 
 4. **Scoring**  
    Each step is assigned binary scores along three dimensions: Reasoning Accuracy, Step Completeness, and Final Answer Correctness.  
-   Aggregated scores for one evaluation pass are computed as:
 
-   $$
-   S_{{\rm final}}^{(i)} = \alpha S_r^{(i)} + \beta S_s^{(i)} + (1 - \alpha - \beta) S_a^{(i)}
-   $$
-
-   where $\alpha = 0.4$, $\beta = 0.3$, and binary scores $S_r^{(i)}, S_s^{(i)}, S_a^{(i)} \in \{0,1\}$.  
-
-   Scoring is repeated three times, and the final score is:
-
-   $$
-   S_{\rm final} = \min\{ S_{\rm final}^{(1)}, S_{\rm final}^{(2)}, S_{\rm final}^{(3)} \}
-   $$
+   Aggregated scores for one evaluation pass are calculated as a weighted sum of the three dimensions, with weights α = 0.4 for reasoning accuracy, β = 0.3 for step completeness, and the remainder for final answer correctness.  
+   Scoring is repeated three times, and the final score is taken as the minimum of the three passes.
 
 This four-step design separates reasoning reconstruction from correctness judgment, enabling fine-grained and interpretable evaluation.  
 The framework outputs two complementary indicators: (1) a *final score* reflecting overall correctness, and (2) a *process score* reflecting reasoning quality and stepwise consistency.
 
 ![StatEval evaluation pipeline](images/eval_pipeline.png)  
 *Illustration of the evaluation pipeline for open-ended questions in StatEval.*
+
 
