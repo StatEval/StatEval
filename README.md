@@ -4,7 +4,7 @@ StatEval is the first comprehensive benchmark dedicated to statistics, designed 
 
 ## Status Update
 - **Code**: Coming soon
-- **Paper**: Already uploaded in this repository
+- **Paper**: [https://arxiv.org/abs/2510.09517]
 - **Website**: [https://stateval.github.io/]
 - **Datasets**: Open-sourced and available at:
   - Foundational Knowledge Dataset: [https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge](https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge)
